@@ -255,25 +255,21 @@ public class RootPanel extends JPanel implements ActionListener {
 			// TODO Implement
 			System.out.println("Start action");
 			
-			//fileQueue = new Vector<>();
-			for (int i = fileQueue.size() - 1; i >= 0; i--) {
-				AbstractFile file = fileQueue.lastElement();
-				file.action();
-				fileQueue.remove(i);
-				
+			//Convert
+			for (AbstractFile abstractFile : fileQueue) {
+				System.out.println(abstractFile.toString());			
+				abstractFile.action();
 			}
+			for (int i = 0; i < fileQueue.size(); i++) {
+				fileQueue.remove(i);			
+			}
+			
 			tableModel.fireTableDataChanged();
 			resetSelection();
 			deleteFilesButton.setVisible(false);
 			startButton.setVisible(false);
 			
 			System.out.println("File queue size: " + fileQueue.size());
-			for (AbstractFile file : fileQueue) {
-				// rimuovi dal datamodel della tabella 
-				System.out.println(file.toString());
-				
-			}
-			return;
 		}
 	}
 
