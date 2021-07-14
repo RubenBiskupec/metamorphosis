@@ -106,7 +106,7 @@ public class RootPanel extends JPanel implements ActionListener {
 		add(box);
 
 		// Password Option
-		passwordLabel1 = new JLabel("Type here your secret password");
+		passwordLabel1 = new JLabel("Type password (at least 8 chars)");
 		passwordField = new JPasswordField(20);
 		passwordLabel2 = new JLabel("Press ENTER to save it");
 		passwordField.addActionListener(new ChangePasswordListener());

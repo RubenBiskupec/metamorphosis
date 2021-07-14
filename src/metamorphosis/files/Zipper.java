@@ -23,7 +23,7 @@ public class Zipper extends AbstractFile {
 		String fileExtension = getFileExtension();
 		System.out.println("File Extension: " + fileExtension);
 		
-		if (fileExtension == "z") {
+		if (fileExtension.contentEquals("z")) {
 			workDirectory = getFilePath();
 			revertAction();
 		} else {
