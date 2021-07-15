@@ -1,21 +1,55 @@
 package metamorphosis.files;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Splitter extends AbstractFile {
 	
-	public Splitter () {
+	protected int bufferSize = 8000;
+    protected byte[] buffer = new byte [bufferSize];
+
+	public Splitter() {
 		super();
 	}
-	
-	public Splitter (File originFile) {
+
+	public Splitter(File originFile) {
 		super(originFile);
 	}
-	
+
 	@Override
-	public void revertAction () {
-		// TODO 
-		// merge
+	public void revertAction() {
+		try {
+			merge();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void merge() throws IOException {
+		int x = 1;
+		int length = 0;
+
+		FileOutputStream fos = new FileOutputStream(workDirectory + "/" + getFileNameWithoutExt());;
+		File currentFile = originFile;
+		FileInputStream fis = null;
+
+		while (currentFile.exists()) {		
+			currentFile = new File(workDirectory + "/" + getFileNameWithoutExt() + "." + x);
+			if (currentFile.exists()) {
+				System.out.println("Merging part " + x);
+				fis = new FileInputStream(currentFile);		
+				while ((length = fis.read(buffer, 0, buffer.length)) >= 0) {
+					fos.write(buffer, 0, length);
+				}
+				fis.close();				
+			} // else break while loop		
+			x++;			
+		}
+		fis.close();
+		fos.close();
+		System.out.println("Merge done");
 	}
 
 	@Override

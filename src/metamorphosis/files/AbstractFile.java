@@ -63,8 +63,9 @@ public abstract class AbstractFile implements FileActions {
 	/**
 	 *
 	 * @param fullFileName
-	 * @return returns the filename without extension Example: fullFileName =
-	 *         file.txt str = file
+	 * @return returns the filename without extension 
+	 * Example: fullFileName = file.txt 
+	 * 			str = file
 	 */
 	public String getFileNameWithoutExt() {
 		String str = originFile.getName();

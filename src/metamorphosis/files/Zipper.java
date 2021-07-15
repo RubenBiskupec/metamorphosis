@@ -61,7 +61,6 @@ public class Zipper extends AbstractFile {
 	public void revertAction() {
 		System.out.println("Unzip");
 		unzip();
-		
 	}
 	
 	private void unzip () {
