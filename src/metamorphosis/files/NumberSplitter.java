@@ -15,7 +15,7 @@ public class NumberSplitter extends Splitter {
 	
 	public NumberSplitter (File originFile, int numberOfParts) {
 		super(originFile);
-		this.numberOfParts = numberOfParts - 1;
+		this.numberOfParts = numberOfParts;
 	}
 	
 	@Override
@@ -51,16 +51,15 @@ public class NumberSplitter extends Splitter {
 		int x = 1;
 		while (fis.available() != 0) {
             int i = 0;
-            
+            String t = workDirectory + "/"+ originFile.getName() + "." + x;
+            FileOutputStream fos = new FileOutputStream(t);
             while ((i <= chunkSize) && (fis.available() != 0) )
             {
-            	String t = workDirectory + "/"+ originFile.getName() + "." + x;
-                FileOutputStream fos = new FileOutputStream(t);
                 int readBytes = fis.read(buffer);
                 i = i + readBytes; // Counts the number of bytes read
-                fos.write(buffer); // Writes the buffer in the new memory
-                fos.close();
+                fos.write(buffer); // Writes the buffer in the new memory              
             }
+            fos.close();
             System.out.println("Part " + x +" created");
             x++;
         } // End of outer while loop

@@ -260,10 +260,7 @@ public class RootPanel extends JPanel implements ActionListener {
 				System.out.println(abstractFile.toString());			
 				abstractFile.action();
 			}
-			for (int i = 0; i < fileQueue.size(); i++) {
-				fileQueue.remove(i);			
-			}
-			
+			fileQueue.clear();
 			tableModel.fireTableDataChanged();
 			resetSelection();
 			deleteFilesButton.setVisible(false);

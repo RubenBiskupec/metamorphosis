@@ -17,6 +17,21 @@ public class Splitter extends AbstractFile {
 	public Splitter(File originFile) {
 		super(originFile);
 	}
+	
+//	@Override
+//	public void action () {
+//		System.out.println("Split Action on file: " + originFile.getName() + " and directory: " + originFile.getPath());
+//		String fileExtension = getFileExtension();
+//		System.out.println("File Extension: " + fileExtension);
+//		
+//		if (fileExtension.contentEquals("1")) {
+//			workDirectory = getFilePath();
+//			revertAction();
+//		} else {
+//			workDirectory = newFolder("split");
+//			doAction();
+//		}
+//	}
 
 	@Override
 	public void revertAction() {
