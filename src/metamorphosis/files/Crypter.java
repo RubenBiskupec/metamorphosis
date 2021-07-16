@@ -2,7 +2,6 @@ package metamorphosis.files;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,15 +23,21 @@ public class Crypter extends AbstractFile {
 
 	private String password;
 
-	public Crypter() {
-		super();
-	}
-
+	/**
+	 * Zipper constructor
+	 * Takes an additional parameter in the constructor
+	 * @param String password
+	 * password has no getters and setters for privacy reasons
+	 */
 	public Crypter(File originFile, String password) {
 		super(originFile);
 		this.password = password;
 	}
 
+	/**
+	 * Checks the file extension
+	 * Calls method to zip file if the extension is different than "c"
+	 */
 	@Override
 	public void action() {
 		System.out.println("Crypt Action on file: " + originFile.getName() + " and directory: " + originFile.getPath());
@@ -48,7 +53,6 @@ public class Crypter extends AbstractFile {
 		}
 	}
 
-	// Crypt
 	@Override
 	public void doAction() {
 		System.out.println("Encrypt");
@@ -60,6 +64,10 @@ public class Crypter extends AbstractFile {
 		}
 	}
 
+	/**
+	 * Creates the new folder if necessary
+	 * Encrypts the file with the given password
+	 */
 	public void encrypt() throws InvalidKeyException, NoSuchAlgorithmException,
 			NoSuchPaddingException, InvalidKeySpecException, IOException {
 		FileInputStream fis = new FileInputStream(originFile);
@@ -78,7 +86,6 @@ public class Crypter extends AbstractFile {
 		write(cis, fos);
 	}
 
-	// Decrypt
 	public void revertAction() {
 		System.out.println("Decrypt");
 		try {
@@ -89,6 +96,10 @@ public class Crypter extends AbstractFile {
 		}
 	}
 	
+	/**
+	 * Creates the new folder if necessary
+	 * Decrypts the file with the given password
+	 */
 	public void decrypt () throws InvalidKeyException, NoSuchAlgorithmException, InvalidKeySpecException, IOException, NoSuchPaddingException {
 		FileInputStream fis = new FileInputStream(originFile);
 		File encryptedFile = new File(workDirectory + "/" + getFileNameWithoutExt());
@@ -106,23 +117,20 @@ public class Crypter extends AbstractFile {
         write(fis, cos);
 	}
 
+	/**
+	 * Writes on file
+	 * @param InputStream in
+	 * @param OutputStream out
+	 * Extracted because it is shared by both encrypt and decrypt
+	 */
 	private static void write(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int nBytesRead = 0;
-
 		while ((nBytesRead = in.read(buffer)) != -1) {
 			out.write(buffer, 0, nBytesRead);
 		}
 		out.close();
 		in.close();
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	@Override

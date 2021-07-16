@@ -6,6 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Abstract class AbstractFile
+ * Contains the "kernel" of info of a file
+ * Implements the methods of FileActions, which will be Overridden
+ */
 public abstract class AbstractFile implements FileActions {
 
 	protected File originFile;
@@ -14,21 +19,18 @@ public abstract class AbstractFile implements FileActions {
 	
 	protected String workDirectory;
 
-	public AbstractFile() {
-		// noop
-	}
-
+	/**
+     * Constructor
+     * @param File originFile
+	 * Saves the file in the field
+     */
 	public AbstractFile(File originFile) {
 		this.originFile = originFile;
 	}
 
+	// These 3 methods will be overridden
 	public void action() {
-		// guess form file extension name what to do
-		if (doAction) {
-			doAction();
-		} else {
-			revertAction();
-		}
+		return;
 	}
 
 	public void doAction() {
@@ -40,7 +42,12 @@ public abstract class AbstractFile implements FileActions {
 	}
 
 	// UTILS
-
+	/**
+	 * Returns the files file extension
+	 * @return returns the file directory 
+	 * Example: path = /Home/Desktop/OOP/file.txt
+	 *         extension = txt
+	 */
 	public String getFileExtension() {
 		String extension = "";
 		int index = originFile.getName().lastIndexOf('.');
@@ -51,9 +58,9 @@ public abstract class AbstractFile implements FileActions {
 	}
 
 	/**
-	 * @param path filepath of given file
-	 * @return returns the file directory Example: path = /Home/Desktop/OOP/file.txt
-	 *         parentPath = /Home/Desktop/OOP
+	 * @return returns the file directory 
+	 * Example: path = /Home/Desktop/OOP/file.txt
+	 *         return parentPath = /Home/Desktop/OOP
 	 */
 	public String getFilePath() {
 		String parentPath = this.originFile.getAbsoluteFile().getParent();
@@ -61,11 +68,9 @@ public abstract class AbstractFile implements FileActions {
 	}
 
 	/**
-	 *
-	 * @param fullFileName
 	 * @return returns the filename without extension 
 	 * Example: fullFileName = file.txt 
-	 * 			str = file
+	 * 			return str = file
 	 */
 	public String getFileNameWithoutExt() {
 		String str = originFile.getName();
@@ -82,8 +87,13 @@ public abstract class AbstractFile implements FileActions {
 	}
 
 	/**
-	 * Creates a folder from a given path Example: str = /Home/Desktop/NewFolder -->
-	 * New folder gets created
+	 * Creates a folder from a given path 
+	 * @param String folderName
+	 * Example: 
+	 * 		filePath = /Home/Desktop
+	 * 		folderName = "NewFolder" 
+	 * 		create /Home/Desktop/NewFolder 
+	 * 		New folder gets created
 	 */
 	public String newFolder(String folderName) {
 		String newFolder = getFilePath() + "/" + folderName;
@@ -101,12 +111,9 @@ public abstract class AbstractFile implements FileActions {
 		return newFolder;
 	}
 
+	// No setter because the file should not change once the object is created
 	public File getOriginFile() {
 		return originFile;
-	}
-
-	public void setOriginFile(File originFile) {
-		this.originFile = originFile;
 	}
 
 }

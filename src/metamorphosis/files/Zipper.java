@@ -7,22 +7,29 @@ import java.io.FileOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
+/**
+ * Zipper class
+ * Depending on the file extension, it zips or unzips the file
+ * Extesion of Abstract file
+ */
 public class Zipper extends AbstractFile {
 
-	public Zipper() {
-
-	}
-
+	/**
+	 * Zipper constructor
+	 */
 	public Zipper(File originFile) {
 		super(originFile);
 	}
 
+	/**
+	 * Checks the file extension
+	 * Calls methos to zip file if the extension is different than "z"
+	 */
 	@Override
 	public void action() {
 		System.out.println("Zip Action on file: " + originFile.getName() + " and directory: " + originFile.getPath());
 		String fileExtension = getFileExtension();
-		System.out.println("File Extension: " + fileExtension);
-		
+		System.out.println("File Extension: " + fileExtension);	
 		if (fileExtension.contentEquals("z")) {
 			workDirectory = getFilePath();
 			revertAction();
@@ -38,6 +45,10 @@ public class Zipper extends AbstractFile {
 		zip();
 	}
 	
+	/**
+	 * Creates the new folder if necessary
+	 * Zips the file
+	 */
 	private void zip () {
 		try {
 			FileInputStream fis = new FileInputStream(originFile);
@@ -63,6 +74,10 @@ public class Zipper extends AbstractFile {
 		unzip();
 	}
 	
+	/**
+	 * Creates the new folder if necessary
+	 * Unzips
+	 */
 	private void unzip () {
 		try {
 			FileInputStream fis = new FileInputStream(originFile);

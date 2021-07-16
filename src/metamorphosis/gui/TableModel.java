@@ -5,19 +5,30 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 import metamorphosis.files.AbstractFile;
-import metamorphosis.files.Crypter;
 
+/**
+ * Table Data Model Class
+ */
 public class TableModel extends DefaultTableModel {
 	
 	private Vector<AbstractFile> queue;
 	String[] tableColumnNames = {"Filename", "Mode", "Size (bytes)"};
 
 
-	public TableModel(Object[] e, int rowCount, Vector<AbstractFile> queue) {
-		super(e, rowCount);
+	/**
+     * Constructor
+     * @param columnNames is the Vector with columns names
+     * @param rowCount
+     * @Param queue is the Vector containing the files data
+     */
+	public TableModel(Object[] columnNames, int rowCount, Vector<AbstractFile> queue) {
+		super(columnNames, rowCount);
 		this.queue = queue;
 	}
 	
+	/**
+	 * Returns the value of the given cell
+     */
 	@Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         AbstractFile file = queue.elementAt(rowIndex);
@@ -31,32 +42,5 @@ public class TableModel extends DefaultTableModel {
             default: 
             	return null;
         }
-    }
-
-	@Override
-    public int getRowCount() {
-        if(queue == null)
-            return 0;
-        return queue.size();
-    }
-	
-	@Override
-    public int getColumnCount() {
-        return tableColumnNames.length;
-    }
-	
-	@Override
-    public String getColumnName(int columnIndex) {
-        return tableColumnNames[columnIndex];
-    }
-	
-	@Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return tableColumnNames[columnIndex].getClass();
-    }
-	
-	@Override
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return false;
     }
 }
