@@ -43,4 +43,31 @@ public class TableModel extends DefaultTableModel {
             	return null;
         }
     }
+	
+	@Override
+    public int getRowCount() {
+        if(queue == null)
+            return 0;
+        return queue.size();
+    }
+
+	@Override
+    public int getColumnCount() {
+        return tableColumnNames.length;
+    }
+
+	@Override
+    public String getColumnName(int columnIndex) {
+        return tableColumnNames[columnIndex];
+    }
+
+	@Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return tableColumnNames[columnIndex].getClass();
+    }
+
+	@Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false;
+    }
 }
