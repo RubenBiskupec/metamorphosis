@@ -336,6 +336,7 @@ public class RootPanel extends JPanel implements ActionListener {
 					}
 				}
 				resetSelection();
+				progressBar.setValue(0);
 				tableModel.fireTableDataChanged();
 				if (fileQueue.size() > 0) {
 					deleteFilesButton.setVisible(true);
@@ -357,7 +358,6 @@ public class RootPanel extends JPanel implements ActionListener {
 		splitField.setText("10");
 		password = "";
 		passwordField.setText("");
-		progressBar.setValue(0);
 		zipRadio.setSelected(true);
 		numberFiles.setSelected(true);
 		addFilesButton.setVisible(true);
